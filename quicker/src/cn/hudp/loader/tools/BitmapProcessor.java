@@ -36,7 +36,7 @@ public class BitmapProcessor {
 		options.inJustDecodeBounds = false;
 		bitmap = BitmapFactory.decodeStream(inputStream, new Rect(), options);
 		if (bitmap == null)
-			L.e("bitmapProcessor", ">>>>>>>>>>>>>>>>>> bitmap==null");
+			LogLoader.e("bitmapProcessor", ">>>>>>>>>>>>>>>>>> bitmap==null");
 		return bitmap;
 	}
 
@@ -112,7 +112,7 @@ public class BitmapProcessor {
 			int fieldValue = (Integer) field.get(object);
 			if (fieldValue > 0 && fieldValue < Integer.MAX_VALUE) {
 				value = fieldValue;
-				L.e("TAG", value + "");
+				LogLoader.e("TAG", value + "");
 			}
 		} catch (Exception e) {
 		}

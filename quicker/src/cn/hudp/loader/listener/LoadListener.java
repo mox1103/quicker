@@ -9,5 +9,5 @@ package cn.hudp.loader.listener;
 public interface LoadListener<T> {
 	void onLoadComplete(String key, T mT);
 
-	void onLoadFailed(String key, T mT);
+//	void onLoadFailed(String key, T mT);
 }

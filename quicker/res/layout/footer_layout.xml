@@ -5,13 +5,12 @@
     android:orientation="vertical" >
 
     <LinearLayout
-        android:id="@+id/update_layout"
+        android:id="@+id/ll_footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingBottom="15px"
-        android:paddingTop="15dp" >
+        android:padding="10dp" >
 
         <ProgressBar
             style="?android:progressBarStyleSmallInverse"

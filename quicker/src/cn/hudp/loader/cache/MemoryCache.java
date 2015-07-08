@@ -5,7 +5,7 @@ import java.util.List;
 import android.graphics.Bitmap;
 import android.util.LruCache;
 import cn.hudp.loader.core.LoaderConfig;
-import cn.hudp.loader.tools.L;
+import cn.hudp.loader.tools.LogLoader;
 
 /**
  * @author HuDP
@@ -43,7 +43,7 @@ public class MemoryCache implements Cache<Bitmap> {
 	@Override
 	public void put(String key, Bitmap mT) {
 		if (key == null || mT == null || mT.isRecycled()) {
-			L.e(LoaderConfig.LOG_TAG, "参数为null");
+			LogLoader.e(LoaderConfig.LOG_TAG, "参数为null");
 			return;
 		} else {
 			mLruCache.put(key, mT);
@@ -53,7 +53,7 @@ public class MemoryCache implements Cache<Bitmap> {
 	@Override
 	public Bitmap get(String key) {
 		if (key == null) {
-			L.e(LoaderConfig.LOG_TAG, "参数为null");
+			LogLoader.e(LoaderConfig.LOG_TAG, "参数为null");
 			return null;
 		}
 		return mLruCache.get(key);

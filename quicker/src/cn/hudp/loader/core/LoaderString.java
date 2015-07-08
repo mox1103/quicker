@@ -2,8 +2,6 @@ package cn.hudp.loader.core;
 
 import java.io.InputStream;
 
-import android.media.SoundPool.OnLoadCompleteListener;
-
 import cn.hudp.loader.download.DownLoad;
 import cn.hudp.loader.listener.LoadListener;
 import cn.hudp.loader.tools.Streamprocessor;

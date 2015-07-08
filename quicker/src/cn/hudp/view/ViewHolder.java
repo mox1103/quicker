@@ -16,6 +16,8 @@ import android.view.animation.AlphaAnimation;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Checkable;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
@@ -36,19 +38,15 @@ public class ViewHolder {
 	private View mConvertView;
 	private LoaderImage mLoaderImage;
 
-	private ViewHolder(Context context, ViewGroup parent, int layoutId,
-			int position) {
+	private ViewHolder(Context context, ViewGroup parent, int layoutId, int position) {
 		this.mContext = context;
 		this.mViews = new SparseArray<View>();
-		mConvertView = LayoutInflater.from(context).inflate(layoutId, parent,
-				false);
+		mConvertView = LayoutInflater.from(context).inflate(layoutId, parent, false);
 		mConvertView.setTag(this);
-		mLoaderImage = LoaderImage.getInstance().init(mContext,
-				CacheModel.MEMORY, 8);
+		mLoaderImage = LoaderImage.getInstance().init(mContext, CacheModel.MEMORY, 8);
 	}
 
-	public static ViewHolder get(Context context, View convertView,
-			ViewGroup parent, int layoutId, int position) {
+	public static ViewHolder get(Context context, View convertView, ViewGroup parent, int layoutId, int position) {
 		if (convertView == null) {
 			return new ViewHolder(context, parent, layoutId, position);
 		}
@@ -135,6 +133,12 @@ public class ViewHolder {
 		return this;
 	}
 
+	public ViewHolder setOnClickListener(int viewId, View.OnClickListener listener) {
+		View view = retrieveView(viewId);
+		view.setOnClickListener(listener);
+		return this;
+	}
+
 	public ViewHolder setVisible(int viewId, boolean visible) {
 		View view = retrieveView(viewId);
 		view.setVisibility(visible ? View.VISIBLE : View.GONE);
@@ -203,6 +207,12 @@ public class ViewHolder {
 	public ViewHolder setChecked(int viewId, boolean checked) {
 		Checkable view = (Checkable) retrieveView(viewId);
 		view.setChecked(checked);
+		return this;
+	}
+
+	public ViewHolder setOnCheckedChange(int viewId, OnCheckedChangeListener mListener) {
+		CompoundButton view = (CompoundButton) retrieveView(viewId);
+		view.setOnCheckedChangeListener(mListener);
 		return this;
 	}
 

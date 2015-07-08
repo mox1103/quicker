@@ -9,11 +9,11 @@ import android.util.Log;
  * @email mox113@foxmail.com
  * @date 2015年6月30日
  */
-public class L {
+public class LogLoader {
 	public static boolean isDebug = true;
 	private static final String TAG = "quicker";
 
-	private L() {
+	private LogLoader() {
 		/* 不允许实例化 */
 		throw new UnsupportedOperationException("cannot be instantiated");
 	}

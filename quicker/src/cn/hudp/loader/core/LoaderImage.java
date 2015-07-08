@@ -3,8 +3,6 @@ package cn.hudp.loader.core;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -16,7 +14,7 @@ import android.widget.ListView;
 import cn.hudp.loader.cache.CacheManager;
 import cn.hudp.loader.cache.CacheModel;
 import cn.hudp.loader.download.ImageNetAsyncTask;
-import cn.hudp.loader.tools.L;
+import cn.hudp.loader.tools.LogLoader;
 
 /**
  * 简易图片加载类 ... 支持内存缓存以及磁盘缓存
@@ -61,17 +59,14 @@ public class LoaderImage {
 	 *            使用多少内存做为缓存 mRatio/可用内存
 	 * @return
 	 */
-	public synchronized LoaderImage init(Context mContext,
-			CacheModel eCacheModel, int usableMemoryRatio) {
+	public synchronized LoaderImage init(Context mContext, CacheModel eCacheModel, int usableMemoryRatio) {
 		LoaderConfig.eCacheModel = eCacheModel;
 		if (usableMemoryRatio <= 0) {
 			LoaderConfig.useMemory = (int) (Runtime.getRuntime().maxMemory() / 8);
 		} else {
 			LoaderConfig.useMemory = (int) (Runtime.getRuntime().maxMemory() / usableMemoryRatio);
 		}
-		LoaderConfig.diskCacheFilePath = Environment
-				.getExternalStorageDirectory().getPath()
-				+ "/Android/data/"
+		LoaderConfig.diskCacheFilePath = Environment.getExternalStorageDirectory().getPath() + "/Android/data/"
 				+ mContext.getPackageName();
 		return mImageLoader;
 	}
@@ -121,10 +116,9 @@ public class LoaderImage {
 	 *            缓存未命中 是否网络请求图片(正常清空推荐为True,如若配合displayImagesToListView方法
 	 *            推荐为false)
 	 */
-	public void displayImage(final ImageView imageView, final String url,
-			final boolean isLoadNet) {
+	public void displayImage(final ImageView imageView, final String url, final boolean isLoadNet) {
 		if (imageView == null || url == null) {
-			L.e(LOG_TAG, "传入参数为空");
+			LogLoader.e(LOG_TAG, "传入参数为空");
 			return;
 		}
 		Loader.cacheThreadPool.execute(new Runnable() {
@@ -133,25 +127,23 @@ public class LoaderImage {
 				final Bitmap bitmap = CacheManager.getCache(url);
 				// 命中缓存
 				if (bitmap != null) {
-					L.e(LOG_TAG, "loadImageFromUrl 命中缓存");
+					LogLoader.e(LOG_TAG, "loadImageFromUrl 命中缓存");
 					mHandler.post(new Runnable() {
 						@Override
 						public void run() {
-							if (imageView.getTag() == null
-									|| imageView.getTag().equals(url)) {
+							if (imageView.getTag() == null || imageView.getTag().equals(url)) {
 								imageView.setImageBitmap(bitmap);
 							}
 						}
 					});
 				} else {// 未命中缓存
 					if (isLoadNet) {
-						L.e(LOG_TAG, "loadImageFromUrl 网络请求图片");
+						LogLoader.e(LOG_TAG, "loadImageFromUrl 网络请求图片");
 						ImageNetAsyncTask task = new ImageNetAsyncTask(imageView);
 						task.execute(url);
 						mTasks.add(task);
 					} else {
-						if (imageView.getTag() == null
-								|| imageView.getTag().equals(url)) {
+						if (imageView.getTag() == null || imageView.getTag().equals(url)) {
 							imageView.setImageResource(LoaderConfig.failResId);
 						}
 					}
@@ -170,8 +162,7 @@ public class LoaderImage {
 	 * @param listView
 	 *            当前ListView
 	 */
-	public void displayImagesToListView(ListView listView, List<String> urls,
-			int start, int end) {
+	public void displayImagesToListView(ListView listView, List<String> urls, int start, int end) {
 		mListView = listView;
 		for (String url : urls) {
 			ImageView iv = (ImageView) mListView.findViewWithTag(url);
@@ -209,6 +200,6 @@ public class LoaderImage {
 	 * @param isDebug
 	 */
 	public void setIsDebug(boolean isDebug) {
-		L.setIsDebug(isDebug);
+		LogLoader.setIsDebug(isDebug);
 	}
 }

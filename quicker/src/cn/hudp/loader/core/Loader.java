@@ -27,18 +27,20 @@ public class Loader {
 	/**
 	 * 缓存调度线程池
 	 */
-	public static ExecutorService cacheThreadPool = Executors
-			.newSingleThreadExecutor();
+	public static ExecutorService cacheThreadPool = Executors.newSingleThreadExecutor();
 	/**
 	 * 网络调度线程池
 	 */
 	public static ExecutorService netThreadPool;
+
 	static {
 		int core = DeviceUtils.getNumCores();
 		if (core <= 2) {
 			netThreadPool = Executors.newFixedThreadPool(1);
-		} else {
-			netThreadPool = Executors.newFixedThreadPool(core - 1);
+		} else if (core <= 4) {
+			netThreadPool = Executors.newFixedThreadPool(3);
+		} else if (core <= 8) {
+			netThreadPool = Executors.newFixedThreadPool(5);
 		}
 	}
 }

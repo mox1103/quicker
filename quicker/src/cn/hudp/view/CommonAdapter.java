@@ -9,8 +9,9 @@ import android.widget.BaseAdapter;
 
 /**
  * 通用Adapter
+ * 
  * @author HuDP
- * @email mox113@foxmail.com 
+ * @email mox113@foxmail.com
  * @date 2015年7月1日
  * @param <T>
  */
@@ -48,4 +49,9 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 	}
 
 	public abstract void convert(ViewHolder viewHolder, T itemData);
+
+	public void onDateChange(List<T> list) {
+		this.mList = list;
+		this.notifyDataSetChanged();
+	}
 }

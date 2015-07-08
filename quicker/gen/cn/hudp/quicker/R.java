@@ -27,12 +27,12 @@ containing a value of this type.
         public static int activity_vertical_margin=0x7f030001;
     }
     public static final class id {
-        public static int load_layout=0x7f060000;
-        public static int update_layout=0x7f060001;
+        public static int ll_footer=0x7f060000;
+        public static int ll_header=0x7f060001;
     }
     public static final class layout {
-        public static int footer=0x7f020000;
-        public static int header=0x7f020001;
+        public static int footer_layout=0x7f020000;
+        public static int header_layout=0x7f020001;
         public static int layout_menu=0x7f020002;
     }
     public static final class string {

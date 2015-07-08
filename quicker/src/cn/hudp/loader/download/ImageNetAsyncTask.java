@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import cn.hudp.loader.cache.CacheManager;
 import cn.hudp.loader.core.LoaderImage;
 import cn.hudp.loader.tools.BitmapProcessor;
-import cn.hudp.loader.tools.L;
+import cn.hudp.loader.tools.LogLoader;
 
 /**
  * @author HuDP
@@ -45,9 +45,9 @@ public class ImageNetAsyncTask extends AsyncTask<String, Void, Bitmap> {
 				imageView.setImageBitmap(bitmap);
 		} else {
 			if (bitmap == null)
-				L.e(LOG_TAG, "bitmap == null");
+				LogLoader.e(LOG_TAG, "bitmap == null");
 			if (imageView == null)
-				L.e(LOG_TAG, "imageView == null");
+				LogLoader.e(LOG_TAG, "imageView == null");
 		}
 		LoaderImage.mTasks.remove(this);
 	}
